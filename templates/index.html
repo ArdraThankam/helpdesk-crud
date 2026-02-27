@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Helpdesk</title>
+    <title>User CRUD</title>
 </head>
 <body>
-    <h1>Helpdesk Ticket System</h1>
-
-    <form action="/add" method="post">
-        <input type="text" name="title" placeholder="Title" required>
-        <input type="text" name="description" placeholder="Description" required>
-        <button type="submit">Add Ticket</button>
+    <h2>Add User</h2>
+    <form method="POST" action="/add">
+        Name: <input type="text" name="name" required>
+        Email: <input type="email" name="email" required>
+        <button type="submit">Add</button>
     </form>
 
-    <h2>Tickets</h2>
+    <h2>Users List</h2>
     <ul>
-        {% for ticket in tickets %}
-            <li>
-                <b>{{ ticket.title }}</b> - {{ ticket.description }}
-                <a href="/delete/{{ loop.index0 }}">Delete</a>
-            </li>
+        {% for user in users %}
+        <li>
+            {{ user.name }} - {{ user.email }}
+            <a href="/delete/{{ user.id }}">Delete</a>
+        </li>
         {% endfor %}
     </ul>
 </body>
