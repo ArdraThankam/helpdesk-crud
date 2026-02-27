@@ -1,24 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User CRUD</title>
+    <title>User Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-btn {
+            background-color: #1e3c72;
+            color: white;
+        }
+
+        .add-btn:hover {
+            background-color: #16305c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #1e3c72;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f4f4f4;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: gray;
+        }
+    </style>
 </head>
 <body>
-    <h2>Add User</h2>
+
+<div class="container">
+    <h1>User Management System</h1>
+
     <form method="POST" action="/add">
-        Name: <input type="text" name="name" required>
-        Email: <input type="email" name="email" required>
-        <button type="submit">Add</button>
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <button class="add-btn" type="submit">Add User</button>
     </form>
 
-    <h2>Users List</h2>
-    <ul>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
         {% for user in users %}
-        <li>
-            {{ user.name }} - {{ user.email }}
-            <a href="/delete/{{ user.id }}">Delete</a>
-        </li>
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <a href="/delete/{{ user.id }}">
+                    <button class="delete-btn">Delete</button>
+                </a>
+            </td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
+
+    <div class="footer">
+        Deployed on Azure App Service | Connected to Azure SQL Database
+    </div>
+</div>
+
 </body>
 </html>
